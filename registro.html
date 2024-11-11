@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Inscripción</title>
+    <link href="https://fonts.googleapis.com/css2?family=Gloock:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Gloock', sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        select {
+            cursor: pointer;
+        }
+
+        .form-group textarea {
+            height: 100px;
+            resize: none;
+        }
+
+        button {
+            background-color: #5c6bc0;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #3f4b8c;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .back-btn {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .back-btn button {
+            background-color: #ef5350;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .back-btn button:hover {
+            background-color: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Formulario de Inscripción</h1>
+        <form action="#" method="post">
+            <!-- Nombre Completo -->
+            <div class="form-group">
+                <label for="nombre-completo">Nombre Completo:</label>
+                <input type="text" id="nombre-completo" name="nombre-completo" required>
+            </div>
+
+            <!-- Lugares visitados -->
+            <div class="form-group">
+                <label for="lugares-visitados">Número de Lugares Visitados:</label>
+                <input type="number" id="lugares-visitados" name="lugares-visitados" min="0" required>
+            </div>
+
+            <!-- Número de Documento -->
+            <div class="form-group">
+                <label for="numero-documento">Número de Documento:</label>
+                <input type="text" id="numero-documento" name="numero-documento" required>
+            </div>
+
+            <!-- Ciudad de Residencia -->
+            <div class="form-group">
+                <label for="ciudad-residencia">Ciudad de Residencia:</label>
+                <input type="text" id="ciudad-residencia" name="ciudad-residencia" required>
+            </div>
+
+            <!-- País de Residencia -->
+            <div class="form-group">
+                <label for="pais-residencia">País de Residencia:</label>
+                <input type="text" id="pais-residencia" name="pais-residencia" required>
+            </div>
+
+            <!-- Número de Teléfono -->
+            <div class="form-group">
+                <label for="numero-telefono">Número de Teléfono:</label>
+                <input type="tel" id="numero-telefono" name="numero-telefono" required>
+            </div>
+
+            <!-- Correo Electrónico -->
+            <div class="form-group">
+                <label for="correo-electronico">Correo Electrónico:</label>
+                <input type="email" id="correo-electronico" name="correo-electronico" required>
+            </div>
+
+            <!-- Cómo nos conoció -->
+            <div class="form-group">
+                <label for="como-nos-conocio">¿Cómo nos conoció?</label>
+                <select id="como-nos-conocio" name="como-nos-conocio" required>
+                    <option value="redes-sociales">Redes Sociales</option>
+                    <option value="recomendacion">Recomendación</option>
+                    <option value="publicidad">Publicidad</option>
+                    <option value="otros">Otros</option>
+                </select>
+            </div>
+
+            <!-- Fecha de Nacimiento -->
+            <div class="form-group">
+                <label for="fecha-nacimiento">Fecha de Nacimiento:</label>
+                <input type="date" id="fecha-nacimiento" name="fecha-nacimiento" required>
+            </div>
+
+            <!-- Lugar de Interés -->
+            <div class="form-group">
+                <label for="lugar-interes">Lugar de Interés:</label>
+                <textarea id="lugar-interes" name="lugar-interes" placeholder="Escriba el lugar que más le interesa visitar..." required></textarea>
+            </div>
+
+            <!-- Botón Enviar -->
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+
+    <!-- Botón Volver -->
+    <div class="back-btn">
+        <button onclick="window.history.back()">Volver a la Página Anterior</button>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2024 Agencia de Viajes</p>
+    </div>
+
+</body>
+</html>

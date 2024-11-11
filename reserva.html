@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Reserva - Agencia de Viajes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Gloock:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Gloock', sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #5c6bc0;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #3f4b8c;
+        }
+
+        .back-btn {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .back-btn a {
+            color: #5c6bc0;
+            text-decoration: none;
+        }
+
+        .back-btn a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Formulario de Reserva</h1>
+        <form action="reserva_enviada.html" method="POST">
+            <div class="form-group">
+                <label for="nombre">Nombre Completo</label>
+                <input type="text" id="nombre" name="nombre" required>
+            </div>
+            <div class="form-group">
+                <label for="identificacion">Número de Identificación</label>
+                <input type="text" id="identificacion" name="identificacion" required>
+            </div>
+            <div class="form-group">
+                <label for="fecha-nacimiento">Fecha de Nacimiento</label>
+                <input type="date" id="fecha-nacimiento" name="fecha_nacimiento" required>
+            </div>
+            <div class="form-group">
+                <label for="telefono">Número de Teléfono</label>
+                <input type="tel" id="telefono" name="telefono" required>
+            </div>
+            <div class="form-group">
+                <label for="correo">Correo Electrónico</label>
+                <input type="email" id="correo" name="correo" required>
+            </div>
+            <div class="form-group">
+                <label for="direccion">Dirección</label>
+                <input type="text" id="direccion" name="direccion" required>
+            </div>
+            <div class="form-group">
+                <label for="lugar-viaje">Lugar a Viajar</label>
+                <input type="text" id="lugar-viaje" name="lugar_viaje" required>
+            </div>
+            <div class="form-group">
+                <label for="fecha-viaje">Fecha de Viaje</label>
+                <input type="date" id="fecha-viaje" name="fecha_viaje" required>
+            </div>
+            <div class="form-group">
+                <label for="fecha-regreso">Fecha de Regreso</label>
+                <input type="date" id="fecha-regreso" name="fecha_regreso" required>
+            </div>
+            <div class="form-group">
+                <label for="comentarios">Comentarios Adicionales</label>
+                <textarea id="comentarios" name="comentarios" rows="4"></textarea>
+            </div>
+            <button type="submit">Enviar Reserva</button>
+        </form>
+
+        <div class="back-btn">
+            <button onclick="window.history.back()">Volver al Panel Principal</button>
+        </div>
+    </div>
+
+</body>
+</html>
