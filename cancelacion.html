@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cancelación de Reservas</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 800px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2rem;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f0f0f0;
+        }
+
+        .cancel-btn, .edit-btn {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            cursor: pointer;
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        .edit-btn {
+            background-color: #2e86c1;
+        }
+
+        .cancel-btn:hover, .edit-btn:hover {
+            background-color: #e53935;
+        }
+
+        .back-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #2e86c1;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+        }
+
+        .back-btn:hover {
+            background-color: #2e86c1;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Lista de Reservas</h1>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Fecha de Reserva</th>
+                    <th>Fecha de Regreso</th>
+                    <th>Destino</th>
+                    <th>Comentarios</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="reservas-lista">
+                
+            </tbody>
+        </table>
+
+        <a href="contenido.html" class="back-btn">Regresar al Panel Principal</a>
+    </div>
+
+    <script>
+        
+        const reservas = JSON.parse(localStorage.getItem("reservas")) || [];
+
+        
+        function cargarReservas() {
+            const listaReservas = document.getElementById('reservas-lista');
+            listaReservas.innerHTML = '';  
+
+            
+            reservas.forEach((reserva, index) => {
+                const row = document.createElement('tr');
+                
+                const nombreCell = document.createElement('td');
+                nombreCell.textContent = reserva.nombre || 'N/A'; 
+
+                const fechaCell = document.createElement('td');
+                fechaCell.textContent = new Date(reserva.fecha).toLocaleDateString();
+
+                const fechaRegresoCell = document.createElement('td');
+                fechaRegresoCell.textContent = new Date(reserva.fechaRegreso).toLocaleDateString() || 'N/A';
+
+                const destinoCell = document.createElement('td');
+                destinoCell.textContent = reserva.destino;
+
+                const comentariosCell = document.createElement('td');
+                comentariosCell.textContent = reserva.comentarios;
+
+                
+                const accionCell = document.createElement('td');
+                
+                const cancelBtn = document.createElement('button');
+                cancelBtn.textContent = 'Cancelar';
+                cancelBtn.classList.add('cancel-btn');
+                cancelBtn.addEventListener('click', function() {
+                    cancelarReserva(index); 
+                });
+
+                const editBtn = document.createElement('button');
+                editBtn.textContent = 'Editar';
+                editBtn.classList.add('edit-btn');
+                editBtn.addEventListener('click', function() {
+                    editarReserva(index); 
+                });
+
+                accionCell.appendChild(cancelBtn);
+                accionCell.appendChild(editBtn);
+
+                row.appendChild(nombreCell);
+                row.appendChild(fechaCell);
+                row.appendChild(fechaRegresoCell); 
+                row.appendChild(destinoCell);
+                row.appendChild(comentariosCell);
+                row.appendChild(accionCell);
+
+                listaReservas.appendChild(row);
+            });
+        }
+
+        
+        function cancelarReserva(index) {
+            
+            reservas.splice(index, 1);
+            localStorage.setItem("reservas", JSON.stringify(reservas)); 
+            cargarReservas(); 
+        }
+
+        
+        function editarReserva(index) {
+            const reserva = reservas[index];
+            
+            localStorage.setItem("reservaEdicion", JSON.stringify(reserva));
+           
+            window.location.href = 'reserva.html';
+        }
+
+        
+        window.onload = cargarReservas;
+    </script>
+
+</body>
+</html>

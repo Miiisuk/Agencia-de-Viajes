@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuarios Registrados</title>
+    <link href="https://fonts.googleapis.com/css2?family=Gloock:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Gloock', sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #5c6bc0;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 6px 12px;
+            margin: 5px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .delete-btn {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .delete-btn:hover {
+            background-color: #e53935;
+        }
+
+        .back-btn {
+            margin-top: 20px;
+            display: block;
+            text-align: center;
+            background-color: #5c6bc0;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .back-btn:hover {
+            background-color: #3f4b8c;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Usuarios Registrados</h1>
+
+        <table id="user-table">
+            <tr>
+                <th>Nombre Completo</th>
+                <th>Lugares Visitados</th>
+                <th>Número de Documento</th>
+                <th>Ciudad de Residencia</th>
+                <th>País de Residencia</th>
+                <th>Número de Teléfono</th>
+                <th>Correo Electrónico</th>
+                <th>Acciones</th>
+            </tr>
+            
+        </table>
+
+        
+        <button class="back-btn" onclick="window.location.href='contenido.html'">Volver al Panel Principal</button>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2024 Agencia de Viajes</p>
+    </div>
+
+    <script>
+        
+        window.onload = function() {
+            const users = JSON.parse(localStorage.getItem("usuarios")) || [];
+            const table = document.getElementById("user-table");
+
+            users.forEach(user => {
+                const row = table.insertRow();
+                row.innerHTML = `
+                    <td>${user.nombre}</td>
+                    <td>${user.lugaresVisitados}</td>
+                    <td>${user.documento}</td>
+                    <td>${user.ciudad}</td>
+                    <td>${user.pais}</td>
+                    <td>${user.telefono}</td>
+                    <td>${user.correo}</td>
+                    <td>
+                        <button class="delete-btn" onclick="deleteUser('${user.nombre}')">Eliminar</button>
+                    </td>
+                `;
+            });
+        };
+
+      
+        function deleteUser(userName) {
+            const users = JSON.parse(localStorage.getItem("usuarios")) || [];
+            const updatedUsers = users.filter(user => user.nombre !== userName);
+            localStorage.setItem("usuarios", JSON.stringify(updatedUsers));
+            window.location.reload();
+        }
+    </script>
+
+</body>
+</html>

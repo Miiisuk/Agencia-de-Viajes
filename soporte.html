@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soporte Técnico</title>
+    <link href="https://fonts.googleapis.com/css2?family=Gloock:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Gloock', sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        label {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 5px;
+            display: block;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        textarea {
+            height: 100px;
+            resize: none;
+        }
+        .button-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+        button {
+            background-color: #5c6bc0;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 48%;
+        }
+        button:hover {
+            background-color: #3f4b8c;
+        }
+        .back-btn {
+            background-color: #ef5350;
+        }
+        .back-btn:hover {
+            background-color: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Soporte Técnico</h1>
+        <p>Complete el formulario a continuación para enviar su solicitud de soporte.</p>
+
+        <form id="soporte-formulario" onsubmit="enviarSolicitud(event)">
+            <div class="form-group">
+                <label for="nombre">Nombre Completo:</label>
+                <input type="text" id="nombre" name="nombre" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Correo Electrónico:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="telefono">Número de Teléfono:</label>
+                <input type="tel" id="telefono" name="telefono" required>
+            </div>
+            <div class="form-group">
+                <label for="problema">Descripción del Problema:</label>
+                <textarea id="problema" name="problema" required></textarea>
+            </div>
+
+            <div class="button-container">
+                <button type="submit">Enviar Solicitud</button>
+                <button type="button" onclick="window.location.href='contenido.html'" class="back-btn">Regresar</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function enviarSolicitud(event) {
+            event.preventDefault();
+
+           
+            const nombre = document.getElementById("nombre").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const telefono = document.getElementById("telefono").value.trim();
+            const problema = document.getElementById("problema").value.trim();
+
+            if (!nombre || !email || !telefono || !problema) {
+                alert("Por favor, complete todos los campos.");
+                return;
+            }
+
+            const soporteData = {
+                id: Date.now(),
+                nombre,
+                email,
+                telefono,
+                problema,
+                estado: "En espera"
+            };
+
+          
+            const casos = JSON.parse(localStorage.getItem("casosSoporte")) || [];
+            casos.push(soporteData);
+            localStorage.setItem("casosSoporte", JSON.stringify(casos));
+
+         
+            alert("Tu solicitud de soporte ha sido enviada con éxito.");
+            document.getElementById("soporte-formulario").reset();
+        }
+    </script>
+
+</body>
+</html>

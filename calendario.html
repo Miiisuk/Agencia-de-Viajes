@@ -4,297 +4,228 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calendario de Reservas</title>
-    <link href="https://fonts.googleapis.com/css2?family=Gloock:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* Estilos CSS */
         body {
-            font-family: 'Gloock', sans-serif;
-            background-color: #f4f4f9;
-            margin: 0;
-            padding: 0;
+            font-family: 'Georgia', serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            flex-direction: column;
         }
-        .container {
-            max-width: 900px;
-            margin: 30px auto;
-            padding: 20px;
-            background-color: white;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-        }
-        h1 {
+
+        .calendar-container {
             text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 600px;
+        }
+
+        .calendar-header {
+            font-size: 1.8rem;
+            font-weight: 500;
+            margin-bottom: 10px;
             color: #333;
         }
-        .calendar-nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        .calendar-nav button, .back-btn button {
-            background-color: #5c6bc0;
+
+        .calendar-header button {
+            padding: 10px 20px;
+            margin: 5px;
+            background-color: #F08080;
             color: white;
             border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .calendar-header button:hover {
+            background-color: #2e86c1;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
             padding: 10px;
-            border-radius: 4px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        .calendar-nav button:hover, .back-btn button:hover {
-            background-color: #3f4b8c;
-        }
-        .calendar {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 5px;
-            justify-items: center;
-            margin-top: 20px;
-        }
-        .calendar .day-header {
-            font-weight: bold;
-            background-color: #f5f5f5;
-            width: 40px;
-            height: 40px;
-            line-height: 40px;
+            background-color: #f0f0f0;
             text-align: center;
         }
-        .calendar .day {
-            width: 40px;
-            height: 40px;
+
+        td {
+            padding: 15px;
             text-align: center;
-            line-height: 40px;
-            margin: 2px;
-            border-radius: 50%;
             cursor: pointer;
-            background-color: #fff;
-            font-size: 16px;
+            border: 1px solid #ddd;
+            font-size: 1.2rem;
             position: relative;
         }
-        .calendar .day:hover {
-            background-color: #4caf50;
-            color: white;
+
+        td:hover {
+            background-color: #f0f0f0;
         }
-        .calendar .day .dot {
+
+        .reserved-las-maldivas {
+            background-color: #CD5C5C;
+        }
+
+        .reserved-miami {
+            background-color: #bb8fce;
+        }
+
+        .reserved-paris {
+            background-color: #a9dfbf;
+        }
+
+        .reserved-moscu {
+            background-color: #e59866;
+        }
+
+        .point {
+            position: absolute;
             width: 10px;
             height: 10px;
-            background-color: #ff5722;
+            background-color: red;
             border-radius: 50%;
-            position: absolute;
-            top: 5px;
-            left: 5px;
+            top: 10px;
+            left: 10px;
         }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        input, textarea {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-        button {
-            background-color: #5c6bc0;
+
+        .back-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #f44336;
             color: white;
             border: none;
-            padding: 12px 20px;
-            border-radius: 4px;
-            font-size: 16px;
-            cursor: pointer;
-            width: 100%;
-        }
-        .reservation-list {
-            margin-top: 20px;
-            display: none;
-        }
-        .reservation {
-            background-color: #f0f0f0;
-            margin: 10px 0;
-            padding: 10px;
             border-radius: 5px;
-            border: 1px solid #ddd;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
         }
-        #form-reserva {
-            display: none;
+
+        .back-btn:hover {
+            background-color: #e53935;
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>Calendario de Reservas</h1>
-
-    <!-- Controles de navegación del calendario -->
-    <div class="calendar-nav">
-        <button onclick="cambiarMes(-1)">&#9664;</button>
-        <div id="mes-nombre"></div>
-        <button onclick="cambiarMes(1)">&#9654;</button>
-    </div>
-
-    <!-- Calendario -->
-    <div id="calendar" class="calendar"></div>
-
-    <!-- Botón para revisar todas las reservas del mes -->
-    <div class="back-btn">
-        <button onclick="mostrarReservasMes()">Revisar todas las reservas del mes</button>
-    </div>
-
-    <!-- Botón para volver a la página principal -->
-    <div class="back-btn">
-        <button onclick="volverAPaginaPrincipal()">Volver a la Página Principal</button>
-    </div>
-
-    <!-- Listado de reservas del mes -->
-    <div id="reservas-lista" class="reservation-list">
-        <div class="back-btn">
-            <button onclick="volverAlCalendario()">Regresar al Calendario</button>
+    <div class="calendar-container">
+        <div class="calendar-header">
+            <button onclick="cambiarMes(-1)">Mes Anterior</button>
+            <h2 id="mes-nombre"></h2>
+            <button onclick="cambiarMes(1)">Mes Siguiente</button>
         </div>
+        <table id="calendar-table">
+            <thead>
+                <tr>
+                    <th>Dom</th>
+                    <th>Lun</th>
+                    <th>Mar</th>
+                    <th>Mié</th>
+                    <th>Jue</th>
+                    <th>Vie</th>
+                    <th>Sáb</th>
+                </tr>
+            </thead>
+            <tbody id="dias-del-mes">
+               
+            </tbody>
+        </table>
+
+        
+        <a href="contenido.html" class="back-btn">Regresar al Panel Principal</a>
     </div>
 
-    <!-- Formulario para agregar reserva -->
-    <div id="form-reserva">
-        <h2>Formulario de Reserva</h2>
-        <form id="reserva-form">
-            <div class="form-group">
-                <label for="fecha-reserva">Fecha de Reserva:</label>
-                <input type="text" id="fecha-reserva" disabled>
-            </div>
-            <div class="form-group">
-                <label for="nombre-completo">Nombre Completo:</label>
-                <input type="text" id="nombre-completo" required>
-            </div>
-            <div class="form-group">
-                <label for="numero-doc">Número de Documento:</label>
-                <input type="text" id="numero-doc" required>
-            </div>
-            <div class="form-group">
-                <label for="telefono">Número de Teléfono:</label>
-                <input type="text" id="telefono" required>
-            </div>
-            <div class="form-group">
-                <label for="correo">Correo Electrónico:</label>
-                <input type="email" id="correo" required>
-            </div>
-            <div class="form-group">
-                <label for="direccion">Dirección:</label>
-                <input type="text" id="direccion" required>
-            </div>
-            <div class="form-group">
-                <label for="comentarios">Comentarios Adicionales:</label>
-                <textarea id="comentarios"></textarea>
-            </div>
-            <button type="submit">Registrar Reserva</button>
-        </form>
+    <script>
+        let mes = new Date().getMonth();
+        let anio = new Date().getFullYear();
 
-        <div class="back-btn">
-            <button onclick="volverAlCalendario()">Volver al Calendario</button>
-        </div>
-    </div>
+        
+        function cargarCalendario() {
+            const diasDelMes = new Date(anio, mes + 1, 0).getDate();
+            const primerDia = new Date(anio, mes, 1).getDay();
+            const diasDiv = document.getElementById('dias-del-mes');
+            const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+            document.getElementById('mes-nombre').textContent = meses[mes] + ' ' + anio;
 
-</div>
+            
+            diasDiv.innerHTML = '';
 
-<script>
-    let fechaActual = new Date();
-    let reservas = JSON.parse(localStorage.getItem('reservas')) || []; // Cargar reservas de localStorage
-
-    function generarCalendario() {
-        const calendar = document.getElementById('calendar');
-        const mesNombre = document.getElementById('mes-nombre');
-        const mes = fechaActual.getMonth();
-        const anio = fechaActual.getFullYear();
-        const primerDia = new Date(anio, mes, 1);
-        const ultimoDia = new Date(anio, mes + 1, 0);
-        const diasDelMes = ultimoDia.getDate();
-        const diaSemana = primerDia.getDay();
-
-        const nombresMeses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
-        mesNombre.innerText = `${nombresMeses[mes]} ${anio}`;
-
-        calendar.innerHTML = '';
-
-        const diasDeLaSemana = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
-        diasDeLaSemana.forEach(dia => {
-            const diaElemento = document.createElement('div');
-            diaElemento.className = 'day-header';
-            diaElemento.innerText = dia;
-            calendar.appendChild(diaElemento);
-        });
-
-        for (let i = 0; i < diaSemana; i++) {
-            calendar.appendChild(document.createElement('div'));
-        }
-
-        for (let dia = 1; dia <= diasDelMes; dia++) {
-            const diaElemento = document.createElement('div');
-            diaElemento.className = 'day';
-            diaElemento.innerText = dia;
-
-            if (reservas.includes(`${dia}/${mes + 1}/${anio}`)) {
-                const dot = document.createElement('div');
-                dot.className = 'dot';
-                diaElemento.appendChild(dot);
+            
+            let row = document.createElement('tr');
+            for (let i = 0; i < primerDia; i++) {
+                row.appendChild(document.createElement('td'));
             }
 
-            diaElemento.addEventListener('click', () => seleccionarDia(dia));
-            calendar.appendChild(diaElemento);
-        }
-    }
+            
+            for (let dia = 1; dia <= diasDelMes; dia++) {
+                const diaDiv = document.createElement('td');
+                diaDiv.textContent = dia;
 
-    function cambiarMes(cambio) {
-        fechaActual.setMonth(fechaActual.getMonth() + cambio);
-        generarCalendario();
-    }
+                
+                let reservas = JSON.parse(localStorage.getItem('reservas')) || [];
+                reservas.forEach(reserva => {
+                    if (new Date(reserva.fecha).getDate() === dia && new Date(reserva.fecha).getMonth() === mes && new Date(reserva.fecha).getFullYear() === anio) {
+                        
+                        switch (reserva.destino) {
+                            case 'Las Maldivas':
+                                diaDiv.classList.add('reserved-las-maldivas');
+                                break;
+                            case 'Miami':
+                                diaDiv.classList.add('reserved-miami');
+                                break;
+                            case 'Paris':
+                                diaDiv.classList.add('reserved-paris');
+                                break;
+                            case 'Moscu':
+                                diaDiv.classList.add('reserved-moscu');
+                                break;
+                        }
+                    }
+                });
 
-    function seleccionarDia(dia) {
-        const mes = fechaActual.getMonth() + 1;
-        const anio = fechaActual.getFullYear();
-        document.getElementById('fecha-reserva').value = `${dia}/${mes}/${anio}`;
-        document.getElementById('form-reserva').style.display = 'block';
-        document.getElementById('calendar').style.display = 'none';
-    }
+                
+                diaDiv.addEventListener('click', function() {
+                    localStorage.setItem('fechaSeleccionada', `${anio}-${mes + 1}-${dia}`);
+                    window.location.href = `reserva.html`;
+                });
 
-    function volverAlCalendario() {
-        document.getElementById('form-reserva').style.display = 'none';
-        document.getElementById('calendar').style.display = 'grid';
-        document.getElementById('reservas-lista').style.display = 'none';
-    }
+                row.appendChild(diaDiv);
 
-    document.getElementById('reserva-form').addEventListener('submit', (event) => {
-        event.preventDefault();
-        const fechaReserva = document.getElementById('fecha-reserva').value;
-        reservas.push(fechaReserva);
-        localStorage.setItem('reservas', JSON.stringify(reservas)); // Guardar en localStorage
-        volverAlCalendario();
-        generarCalendario();
-    });
+                
+                if (row.children.length === 7) {
+                    diasDiv.appendChild(row);
+                    row = document.createElement('tr');
+                }
+            }
 
-    function mostrarReservasMes() {
-        const mes = fechaActual.getMonth() + 1;
-        const anio = fechaActual.getFullYear();
-        const reservasMes = reservas.filter(reserva => reserva.includes(`/${mes}/${anio}`));
-
-        const lista = document.getElementById('reservas-lista');
-        lista.innerHTML = '';
-        if (reservasMes.length > 0) {
-            reservasMes.forEach(reserva => {
-                const reservaElemento = document.createElement('div');
-                reservaElemento.className = 'reservation';
-                reservaElemento.innerText = `Reserva: ${reserva}`;
-                lista.appendChild(reservaElemento);
-            });
-        } else {
-            lista.innerHTML = '<p>No hay reservas para este mes.</p>';
+            if (row.children.length > 0) {
+                diasDiv.appendChild(row);
+            }
         }
 
-        lista.style.display = 'block';
-    }
+     
+        function cambiarMes(movimiento) {
+            mes += movimiento;
+            if (mes > 11) {
+                mes = 0;
+                anio++;
+            } else if (mes < 0) {
+                mes = 11;
+                anio--;
+            }
+            cargarCalendario();
+        }
 
-    function volverAPaginaPrincipal() {
-        window.location.href = "contenido.html"; // Cambia esto a la URL de la página principal
-    }
-
-    generarCalendario();
-</script>
+        
+        cargarCalendario();
+    </script>
 
 </body>
 </html>

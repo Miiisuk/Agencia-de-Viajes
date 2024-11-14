@@ -9,49 +9,67 @@
         body {
             font-family: 'Gloock', sans-serif;
             margin: 0;
-            display: flex;
             height: 100vh;
-            background-color: #f4f4f9;
+            background-image: url('agencia.jpg'); 
+            background-size: cover;
+            background-position: center;
+            color: white;
+        }
+
+        .container {
+            display: flex;
+            height: 100%;
         }
 
         .sidebar {
-            width: 250px;
-            background-color: #3f4b8c;
+            width: 300px;
+            background-color: #F08080; 
             color: white;
             padding: 20px;
             height: 100%;
+            box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.5);
+            font-family: 'Georgia', serif;
         }
 
         .sidebar h3 {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
+            font-family: 'Georgia', serif;
         }
 
         .sidebar .user-name {
             margin-bottom: 20px;
             text-align: center;
             font-size: 18px;
+            font-family: 'Georgia', serif;
         }
 
         .sidebar button {
             width: 100%;
-            padding: 10px;
-            margin: 5px 0;
-            background-color: #5c6bc0;
+            padding: 12px;
+            margin: 10px 0;
+            background-color: #ffffff;
             border: none;
-            border-radius: 4px;
-            color: white;
+            border-radius: 6px;
             font-size: 16px;
             cursor: pointer;
+            font-family: 'Georgia', serif;
         }
 
         .sidebar button:hover {
-            background-color: #3f4b8c;
+            background-color: #FFA07A;
         }
 
         .main-content {
             flex-grow: 1;
-            padding: 20px;
+            padding: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.7);
+            margin-left: 320px;
+            border-radius: 15px;
         }
 
         .settings {
@@ -67,34 +85,49 @@
             bottom: 20px;
             right: 20px;
             font-size: 18px;
-            color: #5c6bc0;
+            color: #5c6bc0; 
+        }
+
+        h1 {
+            font-size: 40px;
+            font-weight: bold;
+            color: #333;
+        }
+
+       
+        p {
+            color: #5c6bc0; 
         }
     </style>
 </head>
 <body>
 
-    <div class="sidebar">
-        <h3>Agencia de Viajes</h3>
-        <div class="user-name">
-            Bienvenido, <strong>Usuario123</strong> <!-- Aquí se mostraría el nombre del usuario -->
+    <div class="container">
+        
+        <div class="sidebar">
+            <h3>Agencia de Viajes</h3>
+            <div class="user-name">
+                Bienvenido, <strong>Usuario Misuk</strong>
+            </div>
+            <button onclick="window.location.href='reserva.html'">Reservas</button>
+            <button onclick="window.location.href='destinos.html'">Destinos</button>
+            <button onclick="window.location.href='registro.html'">Usuarios</button>
+            <button onclick="window.location.href='lista.html'">Lista de Usuarios</button>
+            <button onclick="window.location.href='calendario.html'">Calendario de reserva</button>
+            <button onclick="window.location.href='cancelacion.html'">Cancelación</button>
+            <button onclick="window.location.href='soporte.html'">Soporte</button>
+            <button onclick="window.location.href='casos.html'">Casos en linea</button>
         </div>
-        <button onclick="window.location.href='reserva.html'">Reservas</button>
-        <button onclick="window,location.href='destinos.html'">Destinos</button>
-        <button onclick="window,location.href='registro.html'">Usuarios</button>
-        <button onclick="window,location.href='calendario.html'">Calendario de reserva</button>
-        <button>Cancelacion</button>
-        <button>Soporte</button>
-    </div>
 
-    <div class="main-content">
-        <h1>Bienvenido donde para viajar no hay un Limite</h1>
-        <!-- Aquí puedes agregar el contenido principal -->
+       
+        <div class="main-content">
+            <div>
+                <h1>Bienvenido donde para viajar no hay un Limite</h1>
+                <p>Explora y organiza tus viajes con nosotros. ¡Vamos a descubrir nuevos destinos juntos!</p>
+            </div>
+        </div>
     </div>
-
-    <div class="settings">
-        ⚙️ <!-- Ícono de configuración -->
-    </div>
-
+  
     <div class="footer">
         Viaja sin límites
     </div>

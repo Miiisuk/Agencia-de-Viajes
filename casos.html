@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Casos de Soporte</title>
+    <style>
+        
+        body { font-family: Arial, sans-serif; background-color: #f4f4f9; }
+        .container { max-width: 800px; margin: 50px auto; padding: 20px; background: #fff; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-radius: 8px; }
+        h1 { text-align: center; color: #5c6bc0; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 10px; border: 1px solid #ccc; text-align: left; }
+        .status { color: white; padding: 5px 10px; border-radius: 4px; }
+        .en-espera { background-color: #ff9800; }
+        .cerrado { background-color: #4caf50; }
+        .btn { cursor: pointer; padding: 8px 12px; margin: 4px; color: #fff; border: none; border-radius: 4px; }
+        .cerrar-btn { background-color: #ef5350; }
+        .back-btn { display: inline-block; margin-top: 20px; background-color: #5c6bc0; color: #fff; padding: 10px 15px; text-align: center; border-radius: 4px; text-decoration: none; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Lista de Casos de Soporte</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Correo Electrónico</th>
+                    <th>Teléfono</th>
+                    <th>Problema</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="casos-lista">
+              
+            </tbody>
+        </table>
+        <a href="contenido.html" class="back-btn">Regresar a la Página Principal</a>
+    </div>
+
+    <script>
+        function cargarCasos() {
+            let casos = JSON.parse(localStorage.getItem("casosSoporte")) || [];
+
+            const lista = document.getElementById("casos-lista");
+            lista.innerHTML = ""; 
+
+            casos.forEach((caso, index) => {
+                const fila = document.createElement("tr");
+
+                fila.innerHTML = `
+                    <td>${caso.nombre}</td>
+                    <td>${caso.email}</td>
+                    <td>${caso.telefono}</td>
+                    <td>${caso.problema}</td>
+                    <td><span class="status ${caso.estado === 'En espera' ? 'en-espera' : 'cerrado'}">${caso.estado}</span></td>
+                    <td>
+                        ${caso.estado === 'En espera' ? `<button class="btn cerrar-btn" onclick="cerrarCaso(${index})">Cerrar</button>` : ''}
+                    </td>
+                `;
+
+                lista.appendChild(fila);
+            });
+        }
+
+        function cerrarCaso(index) {
+            let casos = JSON.parse(localStorage.getItem("casosSoporte")) || [];
+            casos[index].estado = "Cerrado"; 
+            localStorage.setItem("casosSoporte", JSON.stringify(casos)); 
+            cargarCasos(); 
+        }
+
+        window.onload = cargarCasos;
+    </script>
+
+</body>
+</html>
